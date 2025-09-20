@@ -3,7 +3,7 @@ Contributors: davidgimenez
 Tags: seo, images, optimization, media, filename
 Requires at least: 5.0
 Tested up to: 6.4
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,6 +50,12 @@ El plugin actualiza tanto los archivos como las referencias en la base de datos.
 Los cambios son permanentes. Siempre haz una copia de seguridad antes del renombrado masivo.
 
 == Changelog ==
+
+= 1.2 =
+* CRITICAL FIX: Corregido bug que bloqueaba la instalación/actualización de plugins y temas
+* Añadida validación estricta para procesar solo archivos de imagen
+* Mejorada detección de contexto de subida (medios vs plugins/temas)
+* Verificación adicional por extensión de archivo
 
 = 1.1 =
 * Nueva funcionalidad de compresión automática de imágenes

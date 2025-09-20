@@ -2,7 +2,7 @@
 /**
  * Plugin Name: SEO Image Optimizer Pro
  * Description: Optimiza automáticamente nombres, compresión y formato de imágenes para SEO
- * Version: 1.1
+ * Version: 1.2
  * Author: David Gimenez
  * Author URI: https://kreamedia.com
  * Plugin URI: https://github.com/aleph2u/seo-image-optimizer
@@ -18,7 +18,7 @@ require_once plugin_dir_path(__FILE__) . 'updater.php';
 new SEO_Image_Optimizer_Updater(__FILE__);
 
 // Definir constantes del plugin
-define('SEO_IMG_VERSION', '1.1');
+define('SEO_IMG_VERSION', '1.2');
 define('SEO_IMG_PATH', plugin_dir_path(__FILE__));
 define('SEO_IMG_URL', plugin_dir_url(__FILE__));
 
@@ -106,13 +106,39 @@ function seo_sanitize_image_filename($filename) {
     return $name . $ext;
 }
 
-// Aplicar filtro al subir archivos
-add_filter('sanitize_file_name', 'seo_sanitize_image_filename', 10);
+// Aplicar filtro al subir archivos SOLO para imágenes
+function seo_should_process_filename($filename) {
+    $extension = pathinfo($filename, PATHINFO_EXTENSION);
+    $image_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'svg'];
+    return in_array(strtolower($extension), $image_extensions);
+}
+
+function seo_sanitize_filename_wrapper($filename) {
+    // Solo procesar si es una imagen
+    if (seo_should_process_filename($filename)) {
+        return seo_sanitize_image_filename($filename);
+    }
+    return $filename;
+}
+add_filter('sanitize_file_name', 'seo_sanitize_filename_wrapper', 10);
 
 /**
  * Optimizar y comprimir imagen al subirla
  */
 function seo_optimize_uploaded_image($file) {
+    // CRITICAL FIX: Solo procesar cuando es una subida de medios, NO plugins/temas
+    // Verificar que estamos en el contexto correcto
+    if (isset($_POST['action']) && in_array($_POST['action'], ['upload-theme', 'upload-plugin'])) {
+        return $file; // No procesar archivos de temas o plugins
+    }
+
+    // Verificar que es realmente una imagen por su extensión
+    $file_extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+    $image_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+    if (!in_array(strtolower($file_extension), $image_extensions)) {
+        return $file;
+    }
+
     $options = seo_img_get_options();
 
     // Solo procesar imágenes
