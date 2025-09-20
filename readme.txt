@@ -3,7 +3,7 @@ Contributors: davidgimenez
 Tags: seo, images, optimization, media, filename
 Requires at least: 5.0
 Tested up to: 6.4
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -50,6 +50,15 @@ El plugin actualiza tanto los archivos como las referencias en la base de datos.
 Los cambios son permanentes. Siempre haz una copia de seguridad antes del renombrado masivo.
 
 == Changelog ==
+
+= 1.1 =
+* Nueva funcionalidad de compresión automática de imágenes
+* Conversión a formato WebP (30-40% menos peso)
+* Redimensionamiento automático de imágenes grandes
+* Panel de configuración avanzado con controles deslizantes
+* Optimización masiva de biblioteca de medios existente
+* Detección automática de capacidades del servidor
+* Mejor interfaz de usuario con estadísticas del sistema
 
 = 1.0 =
 * Versión inicial
