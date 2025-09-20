@@ -3,7 +3,8 @@
  * Plugin Name: SEO Image Optimizer
  * Description: Optimiza automáticamente nombres de archivos de imágenes para SEO
  * Version: 1.0
- * Author: Tu Nombre
+ * Author: David Gimenez
+ * Author URI: https://kreamedia.com
  * Plugin URI: https://github.com/aleph2u/seo-image-optimizer
  */
 

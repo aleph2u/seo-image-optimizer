@@ -1,5 +1,5 @@
 === SEO Image Optimizer ===
-Contributors: tudominio
+Contributors: davidgimenez
 Tags: seo, images, optimization, media, filename
 Requires at least: 5.0
 Tested up to: 6.4
