@@ -27,12 +27,15 @@ class SEO_Image_Optimizer_Updater {
         $this->get_plugin_data();
         $this->get_github_release();
 
-        if (version_compare($this->github_response['tag_name'], $this->plugin_data['Version'], '>')) {
+        // Eliminar 'v' del tag name para comparación correcta
+        $github_version = str_replace('v', '', $this->github_response['tag_name']);
+
+        if (version_compare($github_version, $this->plugin_data['Version'], '>')) {
             $plugin_slug = plugin_basename($this->plugin_file);
 
             $update = array(
                 'slug' => $plugin_slug,
-                'new_version' => $this->github_response['tag_name'],
+                'new_version' => $github_version,
                 'url' => $this->plugin_data['PluginURI'],
                 'package' => $this->github_response['zipball_url'],
                 'icons' => array(),
@@ -63,7 +66,7 @@ class SEO_Image_Optimizer_Updater {
         $response->last_updated = $this->github_response['published_at'];
         $response->slug = plugin_basename($this->plugin_file);
         $response->name = $this->plugin_data['Name'];
-        $response->version = $this->github_response['tag_name'];
+        $response->version = str_replace('v', '', $this->github_response['tag_name']);
         $response->author = $this->plugin_data['Author'];
         $response->homepage = $this->plugin_data['PluginURI'];
         $response->download_link = $this->github_response['zipball_url'];
