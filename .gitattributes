@@ -1,0 +1,33 @@
+# Excluir archivos de los releases de GitHub
+# Estos archivos no se incluirán en el ZIP cuando alguien descargue el release
+
+# Documentación interna
+README-DEV.md export-ignore
+instrucciones-actualizacion.md export-ignore
+CLAUDE.md export-ignore
+
+# Archivos de desarrollo
+.gitignore export-ignore
+.gitattributes export-ignore
+.git export-ignore
+
+# Archivos antiguos/backup
+seo-image-optimizer-old.php export-ignore
+*-old.php export-ignore
+*.bak export-ignore
+
+# Archivos de configuración IDE
+.idea export-ignore
+.vscode export-ignore
+*.swp export-ignore
+.DS_Store export-ignore
+
+# Archivos de prueba
+test/ export-ignore
+tests/ export-ignore
+phpunit.xml export-ignore
+
+# Documentación de desarrollo
+docs/ export-ignore
+TODO.md export-ignore
+CHANGELOG.md export-ignore
